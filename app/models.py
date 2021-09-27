@@ -1,7 +1,14 @@
+from sqlalchemy.orm import backref
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+from . import login_manager
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(UserMixin,db.Model):
     __tablename__= 'users'
 
     id = db.Column(db.Integer,primary_key = True)
@@ -19,3 +26,19 @@ class User(db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
+
+class Category(db.Model):
+    __tablename__='category'
+
+    id = db.Column(db.Integer,primary_key = True)
+    category_name = db.Column(db.String(255))
+    pitch = db.relationship('Pitch',backref = 'role', lazy="dynamic")
+
+
+class Pitch(db.Model):
+    __tablename__='pitch'
+
+    id = db.Column(db.Integer,primary_key = True)
+    pitch_title = db.Column(db.String(255))
+    pitch_content = db.Column(db.String(255))
+    category = db.Column(db.Integer, db.ForeignKey('category.id'))
