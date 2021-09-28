@@ -4,20 +4,21 @@ from . import auth
 from ..models import User
 from .forms import RegisterForm,LoginForm
 from .. import db
+from ..email import mail_message
 
 
-@auth.route('/register', methods =['GET','POST'])
-def register():
-    form = RegisterForm()
+# @auth.route('/register', methods =['GET','POST'])
+# def register():
+#     form = RegisterForm()
    
 
-    if form.validate_on_submit():
-        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('home.index'))
-        title = "New Account"
-    return render_template('auth/register.html',register_form = form)
+#     if form.validate_on_submit():
+#         user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+#         db.session.add(user)
+#         db.session.commit()
+#         return redirect(url_for('home.index'))
+#         title = "New Account"
+#     return render_template('auth/register.html',register_form = form)
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
@@ -44,3 +45,18 @@ def logout():
 @login_required
 def profile():
     return render_template("/auth/profile.html", user_data=current_user)
+
+
+@auth.route('/register',methods = ["GET","POST"])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+        db.session.add(user)
+        db.session.commit()
+
+        mail_message("Welcome to Pitch_App","email/welcome_user",user.email,user=user)
+
+        return redirect(url_for('auth.login'))
+    title = "New Account"
+    return render_template('auth/register.html',registration_form = form)
