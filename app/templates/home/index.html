@@ -1,5 +1,32 @@
+{%extends 'base.html'%}
+
 {% block content %}
 <div>
-   <h1> Hello World</h1>
-</div>
+    {% for item in categories %}
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#{{item.id}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{item.category_name}}</a>
+
+  </div>
+  {% for pitch in item.pitch %}
+
+
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="{{item.id}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{pitch.pitch_title}}</h5>
+              <p class="card-text">{{pitch.pitch_content}}</p>
+              <a href="upvote/{{pitch.id}}" class="card-link">Upvote</a>
+              <a href="downvote/{{pitch.id}}" class="card-link">Downvote</a>
+              {% for votes in pitch.vote %}
+              <p>Likes {{votes.upvote}}</p>
+              <p>Dislikes {{votes.downvote}}</p>
+              {%endfor%}
+            </div>
+          </div>
+    </div>
+  </div>
+{% endfor%}
+{% endfor%}
+  </div>
 {% endblock %}
