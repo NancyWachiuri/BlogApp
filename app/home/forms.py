@@ -14,3 +14,7 @@ class PitchForm(FlaskForm):
     pitch_content = StringField('Add a pitch',validators=[Required()])
     category_name = QuerySelectField(query_factory= lambda: Category.query.all())
     submit = SubmitField('Add Pitch')
+
+class CommentForm(FlaskForm):
+    comment_content = StringField('Add a comment',validators=[Required()])
+    submit = SubmitField('Add Comment')
