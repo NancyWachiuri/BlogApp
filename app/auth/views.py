@@ -1,5 +1,5 @@
 from flask import render_template,request, redirect, url_for,flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from ..models import User
 from .forms import RegisterForm,LoginForm
@@ -39,3 +39,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("main.index"))
+
+@auth.route('/profile')
+@login_required
+def profile():
+    return render_template("/auth/profile.html", user_data=current_user)
