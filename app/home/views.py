@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from . import home
 from flask_login import login_required, current_user
-from .forms import CategoryForm, PitchForm
-from ..models import Category,Pitch, Vote
+from .forms import CategoryForm, PitchForm, CommentForm
+from ..models import Category, Comment,Pitch, Vote
 from .. import db
 
 @login_required
@@ -60,3 +60,23 @@ def downvote(pitch_id):
     db.session.add(vote)
     db.session.commit()
     return redirect(url_for("home.index"))
+
+
+@home.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    pitch = Pitch.query.filter_by(id=id).first()
+    if form.validate_on_submit():
+
+        comment = form.comment_content.data
+
+        new_comment = Comment(pitch=pitch.id,comment=comment,user_id=current_user.id)
+
+        new_comment.save_comment()
+        return redirect(url_for('.index',))
+
+    title = 'comment'
+    return render_template('home/new_comment.html', comment_form=form)
+
+
