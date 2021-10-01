@@ -16,7 +16,7 @@ This project was generated with [PYTHON, FLASK PROGRAMMING]( version 3.8)
 
 ## Setup/Installation 
 
- git clone https://github.com/NancyWachiuri/Pitch-APp.git extract the file cd. Open the application on your favorite browser``
+ git clone https://github.com/NancyWachiuri/BlogApp.git extract the file cd. Open the application on your favorite browser``
 
 
 # Technologies Used:
