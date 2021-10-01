@@ -4,18 +4,18 @@
 <div>
     <div class="jumbotron">
         <h1 class="display-4">{{user_data.username}}</h1>
-        <p class="lead">My Pitch</p>
+        <p class="lead">My Blog</p>
         <hr class="my-4">
       </div>
-  {% for pitch in user_data.pitch %}
+  {% for blog in user_data.blog %}
   {% endfor%}
 
   <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="v-pills-home-tab">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">{{pitch.pitch_title}}</h5>
-              <p class="card-text">{{pitch.pitch_content}}</p>
+              <h5 class="card-title">{{blog.blog_title}}</h5>
+              <p class="card-text">{{blog.blog_content}}</p>
               <a href="#" class="card-link">Card link</a>
               <a href="#" class="card-link">Another link</a>
             </div>

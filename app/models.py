@@ -19,7 +19,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
-    pitch = db.relationship('Pitch',backref = 'user_pitch', lazy="dynamic") 
+    blog = db.relationship('Blog',backref = 'user_blog', lazy="dynamic") 
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
 
     def __repr__(self):
@@ -44,25 +44,25 @@ class Category(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     category_name = db.Column(db.String(255))
-    pitch = db.relationship('Pitch',backref = 'pitch', lazy="dynamic") 
+    blog = db.relationship('Blog',backref = 'blog', lazy="dynamic") 
 
     def __repr__(self):
         return f'{self.category_name}'
 
 
-class Pitch(db.Model):
-    __tablename__='pitch'
+class BLog(db.Model):
+    __tablename__='blog'
 
     id = db.Column(db.Integer,primary_key = True)
-    pitch_title = db.Column(db.String(255))
-    pitch_content = db.Column(db.String(255))
+    blog_title = db.Column(db.String(255))
+    blog_content = db.Column(db.String(255))
     category = db.Column(db.Integer, db.ForeignKey('category.id'))
-    pitch_author = db.Column(db.Integer, db.ForeignKey('users.id'))
+    blog_author = db.Column(db.Integer, db.ForeignKey('users.id'))
     vote = db.relationship('Vote',backref = 'vote', lazy="dynamic") 
     comment = db.relationship('Comment',backref = 'comments', lazy="dynamic") 
 
     def __repr__(self):
-        return f'Pitch{self.pitch_title}'
+        return f'Blog{self.pitch_title}'
 
 
 class Vote(db.Model):
@@ -71,11 +71,11 @@ class Vote(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     upvote = db.Column(db.String(255))
     downvote = db.Column(db.String(255))
-    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    blog = db.Column(db.Integer, db.ForeignKey('blog.id'))
     author = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return f'Pitch{self.upvote}'
+        return f'Blog{self.upvote}'
 
 class Comment(db.Model):
 
@@ -83,7 +83,7 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     comment = db.Column(db.String)
-    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    blog = db.Column(db.Integer, db.ForeignKey('blog.id'))
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
@@ -93,5 +93,5 @@ class Comment(db.Model):
 
     @classmethod
     def get_comments(cls,id):
-        comments = Comment.query.filter_by(pitch=id).all()
+        comments = Comment.query.filter_by(blog=id).all()
         return comments

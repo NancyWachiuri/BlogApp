@@ -1,11 +1,11 @@
-# PitchApp Application.
+# BlogApp Application.
 
 
-Welcome to our Pitch Application. 
+Welcome to our Blog Application. 
 
-In life, you only have 60 seconds to impress someone. 1 minute can make or break you. How do we make sure that you use your 1 minute to actually say something meaningful?
 
-PitchApp is an application that allows you to use that one minute wisely. You will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+
+BlogApp is an application that allows you to use that one minute wisely. You will submit their blogposts and other users will vote on them and leave comments to give their feedback on them.
 {21st September 2021}
 
 ### by Nancy Wachiuri
