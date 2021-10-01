@@ -50,7 +50,7 @@ class Category(db.Model):
         return f'{self.category_name}'
 
 
-class BLog(db.Model):
+class Blog(db.Model):
     __tablename__='blog'
 
     id = db.Column(db.Integer,primary_key = True)
