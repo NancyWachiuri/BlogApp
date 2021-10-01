@@ -9,11 +9,11 @@ class CategoryForm(FlaskForm):
     submit = SubmitField('Add Category')
 
 
-class PitchForm(FlaskForm):
-    pitch_title = StringField('Add a pitch title',validators=[Required()])
-    pitch_content = StringField('Add a pitch',validators=[Required()])
+class BlogForm(FlaskForm):
+    blog_title = StringField('Add a blog title',validators=[Required()])
+    blog_content = StringField('Add a blog',validators=[Required()])
     category_name = QuerySelectField(query_factory= lambda: Category.query.all())
-    submit = SubmitField('Add Pitch')
+    submit = SubmitField('Add Blog')
 
 class CommentForm(FlaskForm):
     comment_content = StringField('Add a comment',validators=[Required()])
