@@ -62,7 +62,7 @@ def downvote(blog_id):
     return redirect(url_for("home.index"))
 
 
-@home.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@home.route('/blog/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
     form = CommentForm()
