@@ -13,7 +13,7 @@ class BlogForm(FlaskForm):
     blog_title = StringField('Add a blog title',validators=[Required()])
     blog_content = StringField('Add a blog',validators=[Required()])
     category_name = QuerySelectField(query_factory= lambda: Category.query.all())
-    submit = SubmitField('Add Blog')
+    submit = SubmitField('Add blog')
 
 class CommentForm(FlaskForm):
     comment_content = StringField('Add a comment',validators=[Required()])
