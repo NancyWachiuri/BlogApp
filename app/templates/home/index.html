@@ -16,15 +16,15 @@
             <div class="card-body">
               <h5 class="card-title">{{blog.blog_title}}</h5>
               <p class="card-text">{{blog.blog_content}}</p>
-              <a href="upvote/{{pitch.id}}" class="card-link">Upvote</a>
-              <a href="downvote/{{pitch.id}}" class="card-link">Downvote</a>
-              <a href="/pitch/comment/new/{{pitch.id}}" class="card-link">Comment</a>
-              {% for votes in pitch.vote %}
+              <a href="upvote/{{blog.id}}" class="card-link">Upvote</a>
+              <a href="downvote/{{blog.id}}" class="card-link">Downvote</a>
+              <a href="/blog/comment/new/{{blog.id}}" class="card-link">Comment</a>
+              {% for votes in blog.vote %}
               <p>Likes {{votes.upvote}}</p>
               <p>Dislikes {{votes.downvote}}</p>
               {%endfor%}
 
-              {% for comments in pitch.comment %}
+              {% for comments in blog.comment %}
               <p>Comments {{comments.comment}}</p>
              
               {%endfor%}
