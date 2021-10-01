@@ -62,7 +62,7 @@ class Blog(db.Model):
     comment = db.relationship('Comment',backref = 'comments', lazy="dynamic") 
 
     def __repr__(self):
-        return f'Blog{self.pitch_title}'
+        return f'Blog{self.blog_title}'
 
 
 class Vote(db.Model):
