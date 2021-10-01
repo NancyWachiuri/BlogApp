@@ -39,7 +39,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("main.index"))
+    return redirect(url_for("home.index"))
 
 @auth.route('/profile')
 @login_required
@@ -59,4 +59,4 @@ def register():
 
         return redirect(url_for('auth.login'))
     title = "New Account"
-    return render_template('auth/register.html',registration_form = form)
+    return render_template('auth/register.html',register_form = form)
